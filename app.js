@@ -1,0 +1,34 @@
+const express = require('express');
+
+const path = require('path');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const environment = require('./environment');
+const postsRoutes = require('./routes/blogs');
+
+const app = express();
+
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'OPTIONS, GET, POST, PUT, PATCH, DELETE'
+    );
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
+
+
+app.use('/blogs', postsRoutes);
+
+mongoose
+  .connect(
+    environment.MongoUrl
+  )
+  .then(result => {
+    app.listen(8080);
+    console.log('server started');
+  })
+  .catch(err => console.log(err));
