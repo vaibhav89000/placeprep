@@ -19,12 +19,12 @@ exports.getblogs = (req,res,next) => {
 };
 
 exports.postblog = (req,res,next) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          const error = new Error('Validation failed, entered data is incorrect.');
-          error.statusCode = 422;
-          throw error;
-        }
+        // const errors = validationResult(req);
+        // if (!errors.isEmpty()) {
+        //   const error = new Error('Validation failed, entered data is incorrect.');
+        //   error.statusCode = 422;
+        //   throw error;
+        // }
 
         const  company = req.body.company;
         const  typeOffer = req.body.typeOffer;
@@ -59,9 +59,12 @@ exports.postblog = (req,res,next) => {
               });
           })
           .catch(err => {
-            if (!err.statusCode) {
-              err.statusCode = 500;
-            }
-            next(err);
+            // if (!err.statusCode) {
+            //   err.statusCode = 500;
+            // }
+            // next(err);
+            res.status(500).json({
+              message: 'Something went wrong!' + err
+            });
           })
 };
