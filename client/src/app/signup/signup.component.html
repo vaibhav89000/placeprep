@@ -1,0 +1,101 @@
+
+<div class="container mt-5">
+  <form [formGroup]="form" (ngSubmit)="signup(form.value)">
+    <fieldset>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="name" formControlName="name"
+        class="form-control" id="exampleInputname"
+         aria-describedby="emailHelp"
+          placeholder="Enter name"
+          [ngClass]="{
+            'is-invalid':
+            form.get('name').errors &&
+              (form.get('name').dirty ||
+               form.get('name').touched ||submitted ),
+            'is-valid':
+              ! form.get('name').errors &&
+              ( form.get('name').dirty ||
+               form.get('name').touched)
+          }">
+
+          <div *ngIf="form.get('name').errors">
+            <small *ngIf="
+            form.get('name').errors.required &&
+                (form.get('name').dirty ||
+                form.get('name').touched ||submitted)
+              " class="form-text text-danger">Name is required</small>
+          </div>
+
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" formControlName="email"
+        class="form-control" id="exampleInputEmail1"
+         aria-describedby="emailHelp"
+          placeholder="Enter email"
+          [ngClass]="{
+            'is-invalid':
+            form.get('email').errors &&
+              (form.get('email').dirty ||
+               form.get('email').touched ||submitted ),
+            'is-valid':
+              ! form.get('email').errors &&
+              ( form.get('email').dirty ||
+               form.get('email').touched)
+          }">
+
+          <div *ngIf="form.get('email').errors">
+            <small *ngIf="
+            form.get('email').errors.required &&
+                (form.get('email').dirty ||
+                form.get('email').touched ||submitted)
+              " class="form-text text-danger">Email is required</small>
+            <small *ngIf="
+            form.get('email').errors.email &&
+              (form.get('email').dirty ||
+              form.get('email').touched)
+            " class="form-text text-danger">Enter the correct email</small>
+          </div>
+
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" formControlName="password"
+         class="form-control" id="exampleInputPassword1"
+          placeholder="Password"
+          [ngClass]="{
+            'is-invalid':
+            form.get('password').errors &&
+              (form.get('password').dirty ||
+               form.get('password').touched ||submitted ),
+            'is-valid':
+              ! form.get('password').errors &&
+              ( form.get('password').dirty ||
+               form.get('password').touched)
+          }">
+
+          <div *ngIf="form.get('password').errors">
+            <small *ngIf="
+            form.get('password').errors.required &&
+                (form.get('password').dirty ||
+                form.get('password').touched ||submitted)
+              " class="form-text text-danger">Password is required</small>
+            <small *ngIf="
+            form.get('password').errors.minlength &&
+              (form.get('password').dirty ||
+              form.get('password').touched)
+            " class="form-text text-danger">Minlength of password is 5</small>
+          </div>
+
+      </div>
+      <div class="form-group">
+        <a [routerLink]="['../','login']">Login ?</a>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form>
+</div>
+
+

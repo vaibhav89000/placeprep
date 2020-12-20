@@ -7,6 +7,10 @@ const blogSchema = new Schema(
             type: String,
             required: true
         },
+        package:{
+            type: String,
+            required: true
+        },
         typeOffer:{
             type: String,
             required: true

@@ -27,6 +27,7 @@ exports.postblog = (req,res,next) => {
         // }
 
         const  company = req.body.company;
+        const  package = req.body.package;
         const  typeOffer = req.body.typeOffer;
         const  role = req.body.role;
         const  rounds = req.body.rounds;
@@ -34,6 +35,7 @@ exports.postblog = (req,res,next) => {
 
         const blog = new Blog({
           company: company,
+          package: package,
           typeOffer: typeOffer,
           role: role,
           rounds: rounds,
