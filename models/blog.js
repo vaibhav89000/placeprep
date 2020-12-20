@@ -7,6 +7,14 @@ const blogSchema = new Schema(
             type: String,
             required: true
         },
+        typeOffer:{
+            type: String,
+            required: true
+        },
+        role:{
+            type: String,
+            required: true
+        },
         rounds:{
             type: Number,
             required: true
@@ -14,8 +22,14 @@ const blogSchema = new Schema(
         description:{
             type: String,
             required: true
-        }
+        },
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
     }
+  },
+  { timestamps: true }
 );
 
 module.exports = mongoose.model('Blog',blogSchema);
