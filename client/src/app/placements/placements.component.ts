@@ -10,6 +10,9 @@ import { CommonServiceService } from '../services/common-service.service';
 })
 export class PlacementsComponent implements OnInit {
 
+  blogs: any;
+  showBlogs: any = [];
+
   constructor(private CommonService: CommonServiceService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService) { }
@@ -23,7 +26,30 @@ export class PlacementsComponent implements OnInit {
     this.spinner.show();
 
     this.CommonService.fetchall().subscribe((res)=>{
-      console.log('res',res);
+      // console.log('res',res);
+
+      this.blogs = res['blogs'];
+      console.log('blogs',this.blogs);
+
+      this.showBlogs = [];
+
+      let i=0;
+      let arr=[];
+      this.blogs.forEach(element => {
+        i = i+1;
+        arr.push(element);
+        if(i===3){
+          i=0;
+          this.showBlogs.push(arr);
+          arr=[];
+        }
+      });
+      if(i>0){
+        this.showBlogs.push(arr);
+        console.log('is i',i);
+      }
+
+      console.log(this.showBlogs);
 
       setTimeout(() => {
         /** spinner ends after 5 seconds */

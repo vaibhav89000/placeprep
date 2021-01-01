@@ -1,12 +1,21 @@
 <div class="container mt-5">
 
 
-  <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-    <div class="card-header">Header</div>
-    <div class="card-body">
-      <h4 class="card-title">Success card title</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div *ngFor="let row of showBlogs" class="row">
+    <div *ngFor="let col of row" class="col-sm-4 col-12">
+      <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+        <div class="card-header">{{col.company}}</div>
+        <div class="card-body">
+          <p class="card-text"><span>Rounds</span> {{col.rounds}}</p>
+          <p class="card-title"><span>Type Of Offer</span> {{col.typeOffer}}</p>
+          <p class="card-text"><span>Role</span> {{col.role}}</p>
+          <p class="card-text"><span>Package</span> {{col.role}}</p>
+
+        </div>
+      </div>
     </div>
   </div>
 
+
 </div>
+
