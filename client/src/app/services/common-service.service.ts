@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonServiceService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+    private LocalStorage:LocalStorageService) { }
 
   fetchall(){
-    let auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5dXNoQGdtYWlsLmNvbSIsInVzZXJJZCI6IjVmZGY1NTU2ZTA4OThkMTFhNDcxZjgxZCIsImlhdCI6MTYwOTQ2OTc1NywiZXhwIjoxNjA5NDczMzU3fQ.j-Seu7yJQjfSZbn4JrUJ0KZLQGOM5g2FFFt9YxJ9zDc";
+    let auth_token = this.LocalStorage.get("token");
     // const headers = new Headers({
     //   'Content-Type': 'application/json',
     //   'Authorization': `Bearer ${auth_token}`

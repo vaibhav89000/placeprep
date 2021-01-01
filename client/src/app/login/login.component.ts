@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from '../services/auth-service.service';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private AuthServiceService: AuthServiceService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private router: Router) {
     this.submitted = false;
   }
 
@@ -37,21 +39,22 @@ export class LoginComponent implements OnInit {
 
     this.spinner.show();
     this.AuthServiceService.login(value)
-    .then((res)=> {
-      console.log(res);
-      setTimeout(() => {
-        this.spinner.hide();
-      }, 2000);
-      this.form.reset();
-        this.toastr.success('Success', 'User Created');
-    })
-    .catch((err)=>{
-      console.log(err);
-      setTimeout(() => {
-        this.spinner.hide();
-      }, 2000);
-      this.toastr.error('Failed', err.error.message);
-    })
+      .then((res) => {
+        console.log(res);
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 2000);
+        this.form.reset();
+        this.toastr.success('Success', 'Login Successful');
+        this.router.navigate(['placements']);
+      })
+      .catch((err) => {
+        console.log(err);
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 2000);
+        this.toastr.error('Failed', err.error.message);
+      })
     this.submitted = false;
   }
 
