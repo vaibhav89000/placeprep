@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,9 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   submitted: boolean = false;
 
-  constructor() {
+  constructor(private AuthServiceService: AuthServiceService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService) {
     this.submitted = false;
   }
 
@@ -24,13 +29,29 @@ export class LoginComponent implements OnInit {
   }
 
   login(value) {
-    console.log('login');
+
     this.submitted = true;
     if (!this.form.valid) {
       return;
     }
 
-    console.log(value);
+    this.spinner.show();
+    this.AuthServiceService.login(value)
+    .then((res)=> {
+      console.log(res);
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 2000);
+      this.form.reset();
+        this.toastr.success('Success', 'User Created');
+    })
+    .catch((err)=>{
+      console.log(err);
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 2000);
+      this.toastr.error('Failed', err.error.message);
+    })
     this.submitted = false;
   }
 
