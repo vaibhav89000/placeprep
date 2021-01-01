@@ -40,20 +40,20 @@ export class SignupComponent implements OnInit {
     this.spinner.show();
     this.AuthServiceService.signup(value)
       .then((res) => {
-        // console.log('success');
+
         setTimeout(() => {
-          /** spinner ends after 5 seconds */
           this.spinner.hide();
         }, 2000);
+
         this.form.reset();
-        this.toastr.success('Success','User Created');
+        this.toastr.success('Success', 'User Created');
       })
       .catch((err) => {
+
         setTimeout(() => {
-          /** spinner ends after 5 seconds */
           this.spinner.hide();
         }, 2000);
-        // console.log('Error',err.error.data);
+
         if ((err.error.data).length > 0) {
           console.log('Error', err.error.data);
           err.error.data.forEach(err => {
