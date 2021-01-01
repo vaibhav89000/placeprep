@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthServiceService } from '../services/auth-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +14,9 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   submitted: boolean = false;
 
-  constructor() {
+  constructor(private AuthServiceService: AuthServiceService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService) {
     this.submitted = false;
   }
 
@@ -19,18 +24,47 @@ export class SignupComponent implements OnInit {
     this.submitted = false;
 
     this.form = new FormGroup({
-      name: new FormControl("",[Validators.required]),
+      name: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required, Validators.minLength(5)])
     });
   }
 
   signup(value) {
-    console.log('login');
+    // console.log('signup',value);
     this.submitted = true;
     if (!this.form.valid) {
       return;
     }
+
+    this.spinner.show();
+    this.AuthServiceService.signup(value)
+      .then((res) => {
+        // console.log('success');
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 2000);
+        this.form.reset();
+        this.toastr.success('Success','User Created');
+      })
+      .catch((err) => {
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 2000);
+        // console.log('Error',err.error.data);
+        if ((err.error.data).length > 0) {
+          console.log('Error', err.error.data);
+          err.error.data.forEach(err => {
+            console.log(err.msg);
+            this.toastr.error('Failed', err.msg);
+          });
+        }
+        else {
+          this.toastr.error('Failed', err.msg);
+        }
+      });
 
     console.log(value);
     this.submitted = false;
