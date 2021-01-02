@@ -1,0 +1,11 @@
+.nav-link:focus {
+  cursor: pointer !important;
+}
+
+.nav-link{
+  cursor: pointer !important;
+}
+
+a:hover{
+  color: black !important;
+}

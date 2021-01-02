@@ -33,7 +33,7 @@ export class AuthGaurdService {
     if (this.LocalStorage.get("token")) {
       return true;
     } else {
-      this.router.navigate(["/"]);
+      this.router.navigate(["login"]);
     }
     }
 }

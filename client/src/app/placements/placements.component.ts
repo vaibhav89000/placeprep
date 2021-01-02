@@ -29,7 +29,7 @@ export class PlacementsComponent implements OnInit {
       // console.log('res',res);
 
       this.blogs = res['blogs'];
-      console.log('blogs',this.blogs);
+      // console.log('blogs',this.blogs);
 
       this.showBlogs = [];
 
@@ -46,10 +46,10 @@ export class PlacementsComponent implements OnInit {
       });
       if(i>0){
         this.showBlogs.push(arr);
-        console.log('is i',i);
+        // console.log('is i',i);
       }
 
-      console.log(this.showBlogs);
+      // console.log(this.showBlogs);
 
       setTimeout(() => {
         /** spinner ends after 5 seconds */
