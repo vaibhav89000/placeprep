@@ -4,11 +4,11 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonServiceService } from '../services/common-service.service';
 
 @Component({
-  selector: 'app-placements',
-  templateUrl: './placements.component.html',
-  styleUrls: ['./placements.component.css']
+  selector: 'app-my-experiences',
+  templateUrl: './my-experiences.component.html',
+  styleUrls: ['./my-experiences.component.css']
 })
-export class PlacementsComponent implements OnInit {
+export class MyExperiencesComponent implements OnInit {
 
   blogs: any;
   showBlogs: any = [];
@@ -25,8 +25,7 @@ export class PlacementsComponent implements OnInit {
 
     this.spinner.show();
 
-    this.CommonService.fetchall().subscribe((res)=>{
-      // console.log('res',res);
+    this.CommonService.fetchUserPost().subscribe((res)=>{
 
       this.blogs = res['blogs'];
       // console.log('blogs',this.blogs);
@@ -66,6 +65,7 @@ export class PlacementsComponent implements OnInit {
       this.toastr.error('Failed');
     })
   }
+
 
 
 

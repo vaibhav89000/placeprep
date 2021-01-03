@@ -11,13 +11,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MyExperiencesComponent } from './my-experiences/my-experiences.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    PlacementsComponent
+    PlacementsComponent,
+    MyExperiencesComponent
   ],
   imports: [
     BrowserModule,

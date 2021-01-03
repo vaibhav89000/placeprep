@@ -9,3 +9,7 @@
 a:hover{
   color: black !important;
 }
+
+a{
+  color: white !important;
+}

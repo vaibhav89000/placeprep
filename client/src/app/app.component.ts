@@ -47,6 +47,7 @@ export class AppComponent {
 
   experiences(){
     this.shownav = !this.shownav;
+    this.router.navigate(['/my-experiences']);
   }
 
   }

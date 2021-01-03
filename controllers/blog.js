@@ -87,7 +87,7 @@ exports.getsingleblogs = (req,res,next) => {
   .then(result => {
     res.status(200).json({
         message: `Blogs for ${userId}`,
-        result: result
+        blogs: result
       });
   })
   })

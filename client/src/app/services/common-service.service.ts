@@ -12,10 +12,6 @@ export class CommonServiceService {
 
   fetchall(){
     let auth_token = this.LocalStorage.get("token");
-    // const headers = new Headers({
-    //   'Content-Type': 'application/json',
-    //   'Authorization': `Bearer ${auth_token}`
-    // })
 
     const headerDict = {
       'Content-Type': 'application/json',
@@ -28,6 +24,22 @@ export class CommonServiceService {
     };
 
     return this.http.get("http://localhost:8080/blogs/get", requestOptions);
+  }
+
+  fetchUserPost(){
+    let auth_token = this.LocalStorage.get("token");
+
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+
+    return this.http.get("http://localhost:8080/blogs/getsingle", requestOptions);
   }
 
 }
