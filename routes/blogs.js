@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get('/get', isAuth, blogController.getblogs);
 
+router.get('/getsingle', isAuth, blogController.getsingleblogs);
+
 router.post('/post', isAuth, blogController.postblog);
 
 module.exports = router;    
