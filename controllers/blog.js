@@ -97,3 +97,29 @@ exports.getsingleblogs = (req,res,next) => {
     });
   })
 }
+
+exports.getsingleblog = (req,res,next) => {
+  // const userId = req.userId;
+  const blogId = req.params.id;
+  console.log("blogId",blogId);
+  
+  Blog.findById(blogId)
+  .then(result => {
+    if(result){
+      res.status(200).json({
+        message: `Blogs for ${blogId}`,
+        blogs: result
+      });
+    }
+    res.status(500).json({
+      message: `Blogs for ${blogId}`,
+        blogs: null
+    });
+    
+  })
+  .catch(err => {
+    res.status(500).json({
+      message: 'Something went wrong!' + err
+    });
+  })
+}

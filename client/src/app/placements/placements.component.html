@@ -3,7 +3,7 @@
 
   <div *ngFor="let row of showBlogs" class="row">
     <div *ngFor="let col of row" class="col-sm-4 col-12">
-      <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+      <div class="card text-white bg-primary mb-3" style="max-width: 20rem;" (click)="view(col._id)">
         <div class="card-header">{{col.company}}</div>
         <div class="card-body">
           <p class="card-text"><span>Rounds</span> {{col.rounds}}</p>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CommonServiceService } from '../services/common-service.service';
@@ -15,7 +16,8 @@ export class PlacementsComponent implements OnInit {
 
   constructor(private CommonService: CommonServiceService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.fetchAll();
@@ -57,7 +59,7 @@ export class PlacementsComponent implements OnInit {
       }, 1000);
 
     },err => {
-      console.log('err',err);
+      // console.log('err',err);
 
       setTimeout(() => {
         /** spinner ends after 5 seconds */
@@ -65,6 +67,10 @@ export class PlacementsComponent implements OnInit {
       }, 2000);
       this.toastr.error('Failed');
     })
+  }
+
+  view(id){
+    this.router.navigate(["view-placement",id]);
   }
 
 

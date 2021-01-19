@@ -12,6 +12,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyExperiencesComponent } from './my-experiences/my-experiences.component';
+import { ViewPlacementComponent } from './view-placement/view-placement.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MyExperiencesComponent } from './my-experiences/my-experiences.componen
     LoginComponent,
     SignupComponent,
     PlacementsComponent,
-    MyExperiencesComponent
+    MyExperiencesComponent,
+    ViewPlacementComponent
   ],
   imports: [
     BrowserModule,
