@@ -36,6 +36,9 @@ export class ViewPlacementComponent implements OnInit {
       console.log('res',res);
 
       this.blog = res['blogs'];
+      if(this.blog === null){
+        this.router.navigate(["placements"]);
+      }
       this.spinner.hide();
     })
     .catch((err)=>{

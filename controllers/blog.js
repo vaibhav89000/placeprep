@@ -1,6 +1,7 @@
 const Blog = require('../models/blog');
 const User = require('../models/user');
 const mongoose = require('mongoose');
+const { json } = require('body-parser');
 
 exports.getblogs = (req,res,next) => {
     Blog.find()
@@ -103,19 +104,32 @@ exports.getsingleblog = (req,res,next) => {
   const blogId = req.params.id;
   console.log("blogId",blogId);
   
+  blog = {};
   Blog.findById(blogId)
   .then(result => {
     if(result){
-      res.status(200).json({
-        message: `Blogs for ${blogId}`,
-        blogs: result
-      });
+      // res.status(200).json({
+      //   message: `Blogs for ${blogId}`,
+      //   blogs: result
+      // });
+      console.log('result',result);
+      blog = JSON.parse(JSON.stringify(result));
+      return User.findById(result.creator)
     }
     res.status(500).json({
       message: `Blogs for ${blogId}`,
         blogs: null
     });
     
+  })
+  .then((result)=>{
+    console.log(result);
+    blog["email"] = result.email;
+    blog["name"] = result.name;
+    res.status(200).json({
+        message: `Blogs for ${blogId}`,
+        blogs: blog
+      });
   })
   .catch(err => {
     res.status(500).json({
