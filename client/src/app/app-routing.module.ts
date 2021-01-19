@@ -6,6 +6,7 @@ import { PlacementsComponent } from '../app/placements/placements.component';
 import {AuthGaurdService} from './services/auth-gaurd.service';
 import { MyExperiencesComponent } from './my-experiences/my-experiences.component';
 import { ViewPlacementComponent } from './view-placement/view-placement.component';
+import { AddExperiencesComponent } from './add-experiences/add-experiences.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'placements',canActivate: [AuthGaurdService], component: PlacementsComponent },
   { path: 'my-experiences',canActivate: [AuthGaurdService], component: MyExperiencesComponent },
-  { path: 'view-placement/:id',canActivate: [AuthGaurdService], component: ViewPlacementComponent }
+  { path: 'view-placement/:id',canActivate: [AuthGaurdService], component: ViewPlacementComponent },
+  { path: 'add-experiences',canActivate: [AuthGaurdService], component: AddExperiencesComponent }
 ];
 
 @NgModule({

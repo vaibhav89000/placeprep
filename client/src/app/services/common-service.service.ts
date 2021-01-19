@@ -58,4 +58,21 @@ export class CommonServiceService {
     return this.http.get(`http://localhost:8080/blogs/getblogdetail/${id}`, requestOptions).toPromise();
   }
 
+  addPost(body){
+    let auth_token = this.LocalStorage.get("token");
+
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict)
+    };
+    console.log("requestOptions",requestOptions);
+
+    return this.http.post(`http://localhost:8080/blogs/post`,body, requestOptions).toPromise();
+  }
+
 }

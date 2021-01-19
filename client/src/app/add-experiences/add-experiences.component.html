@@ -1,0 +1,165 @@
+<div class="container mt-5">
+
+
+  <form [formGroup]="form" (ngSubmit)="create(form.value)">
+    <fieldset>
+
+      <div class="form-group">
+        <label for="company">Company Name</label>
+        <input formControlName="company" type="email" class="form-control" id="company" aria-describedby="emailHelp" placeholder="Enter Company Name"
+        [ngClass]="{
+            'is-invalid':
+            form.get('company').errors &&
+              (form.get('company').dirty ||
+               form.get('company').touched ||submitted ),
+            'is-valid':
+              ! form.get('company').errors &&
+              ( form.get('company').dirty ||
+               form.get('company').touched)
+          }">
+
+      </div>
+
+      <div class="form-group">
+        <label for="package">Package(per annum in lakh)</label>
+        <input formControlName="package" type="text" class="form-control" id="package" aria-describedby="emailHelp" placeholder="Enter Package"
+        [ngClass]="{
+          'is-invalid':
+          form.get('package').errors &&
+            (form.get('package').dirty ||
+             form.get('package').touched ||submitted ),
+          'is-valid':
+            ! form.get('package').errors &&
+            ( form.get('package').dirty ||
+             form.get('package').touched)
+        }">
+      </div>
+
+      <div class="form-group">
+        <label for="package">Rounds</label>
+        <input formControlName="rounds" type="number" class="form-control" id="package" aria-describedby="emailHelp" placeholder="Enter Package"
+        [ngClass]="{
+          'is-invalid':
+          form.get('rounds').errors &&
+            (form.get('rounds').dirty ||
+             form.get('rounds').touched ||submitted ),
+          'is-valid':
+            ! form.get('rounds').errors &&
+            ( form.get('rounds').dirty ||
+             form.get('rounds').touched)
+        }">
+      </div>
+
+
+      <div class="form-group">
+        <label for="exampleSelect1">Type Of Offer</label>
+        <select formControlName="typeOffer" class="form-control" id="exampleSelect1"
+        [ngClass]="{
+          'is-invalid':
+          form.get('typeOffer').errors &&
+            (form.get('typeOffer').dirty ||
+             form.get('typeOffer').touched ||submitted ),
+          'is-valid':
+            ! form.get('typeOffer').errors &&
+            ( form.get('typeOffer').dirty ||
+             form.get('typeOffer').touched)
+        }">
+        <option *ngFor="let offer of offers" [value]="offer">{{offer}}</option>
+
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleSelect1">Role</label>
+        <select formControlName="role" class="form-control" id="exampleSelect1"
+        [ngClass]="{
+          'is-invalid':
+          form.get('role').errors &&
+            (form.get('role').dirty ||
+             form.get('role').touched ||submitted ),
+          'is-valid':
+            ! form.get('role').errors &&
+            ( form.get('role').dirty ||
+             form.get('role').touched)
+        }">
+
+          <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" formControlName="description" id="exampleTextarea" rows="3"
+        [ngClass]="{
+          'is-invalid':
+          form.get('description').errors &&
+            (form.get('description').dirty ||
+             form.get('description').touched ||submitted ),
+          'is-valid':
+            ! form.get('description').errors &&
+            ( form.get('description').dirty ||
+             form.get('description').touched)
+        }"></textarea>
+      </div>
+      <!-- <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+        <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+      </div>
+      <fieldset class="form-group">
+        <legend>Radio buttons</legend>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+            Option one is this and that—be sure to include why it's great
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+            Option two can be something else and selecting it will deselect option one
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled="">
+            Option three is disabled
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <legend>Checkboxes</legend>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value="" checked="">
+            Option one is this and that—be sure to include why it's great
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value="" disabled="">
+            Option two is disabled
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <legend>Sliders</legend>
+        <label for="customRange1">Example range</label>
+        <input type="range" class="custom-range" id="customRange1">
+      </fieldset> -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form>
+  <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+
+</div>
+

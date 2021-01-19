@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   submitted: boolean = false;
-
   constructor(private AuthServiceService: AuthServiceService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
@@ -23,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.submitted = false;
     this.form = new FormGroup({
       email: new FormControl("", [Validators.required, Validators.email]),
