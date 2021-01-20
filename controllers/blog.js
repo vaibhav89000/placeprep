@@ -97,12 +97,12 @@ exports.getsingleblogs = (req,res,next) => {
       message: 'Something went wrong!' + err
     });
   })
-}
+};
 
 exports.getsingleblog = (req,res,next) => {
   // const userId = req.userId;
   const blogId = req.params.id;
-  console.log("blogId",blogId);
+  // console.log("blogId",blogId);
   
   blog = {};
   Blog.findById(blogId)
@@ -112,7 +112,7 @@ exports.getsingleblog = (req,res,next) => {
       //   message: `Blogs for ${blogId}`,
       //   blogs: result
       // });
-      console.log('result',result);
+      // console.log('result',result);
       blog = JSON.parse(JSON.stringify(result));
       return User.findById(result.creator)
     }
@@ -123,7 +123,7 @@ exports.getsingleblog = (req,res,next) => {
     
   })
   .then((result)=>{
-    console.log(result);
+    // console.log(result);
     blog["email"] = result.email;
     blog["name"] = result.name;
     res.status(200).json({
@@ -136,4 +136,66 @@ exports.getsingleblog = (req,res,next) => {
       message: 'Something went wrong!' + err
     });
   })
-}
+};
+
+exports.updateblog = (req,res,next) => {
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   const error = new Error('Validation failed, entered data is incorrect.');
+  //   error.statusCode = 422;
+  //   throw error;
+  // }
+
+  const blogId = req.body.blogid;
+
+  const  company = req.body.company;
+  const  package = req.body.package;
+  const  typeOffer = req.body.typeOffer;
+  const  role = req.body.role;
+  const  rounds = req.body.rounds;
+  const  description = req.body.description;
+
+  // const blog = new Blog({
+  //   company: company,
+  //   package: package,
+  //   typeOffer: typeOffer,
+  //   role: role,
+  //   rounds: rounds,
+  //   description: description,
+  //   creator: req.userId
+  // });
+
+    Blog.findById(blogId)
+    .then((blog)=>{
+      if(blog){
+        blog.company = company;
+      blog.package = package;
+      blog.typeOffer = typeOffer;
+      blog.role = role;
+      blog.rounds = rounds;
+      blog.description = description;
+
+      return blog.save()
+      }
+
+      res.status(500).json({
+        message: 'Something went wrong!'
+      });
+      
+    })
+    .then(result => {
+      res.status(201).json({
+          message: 'Blog updated successfully!',
+          blog: result
+        });
+    })
+    .catch(err => {
+      // if (!err.statusCode) {
+      //   err.statusCode = 500;
+      // }
+      // next(err);
+      res.status(500).json({
+        message: 'Something went wrong!' + err
+      });
+    })
+};
