@@ -70,7 +70,7 @@ export class PlacementsComponent implements OnInit {
   }
 
   view(id){
-    this.router.navigate(["view-placement",id]);
+    this.router.navigate(["view",id]);
   }
 
 

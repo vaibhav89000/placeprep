@@ -16,6 +16,8 @@ export class AddExperiencesComponent implements OnInit {
   submitted: any;
   roles;
   offers;
+  blog: any;
+
   constructor(private CommonService: CommonServiceService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
@@ -26,6 +28,14 @@ export class AddExperiencesComponent implements OnInit {
 
   ngOnInit(): void {
     this.submitted = false;
+    this.form = new FormGroup({
+      company: new FormControl("",[Validators.required]),
+      package: new FormControl("",[Validators.required]),
+      typeOffer: new FormControl("",[Validators.required]),
+      role: new FormControl("",[Validators.required]),
+      rounds: new FormControl("",[Validators.required]),
+      description: new FormControl("",[Validators.required])
+    });
     this.roles = [
       "Software tester",
         "Web developer",
@@ -51,14 +61,15 @@ export class AddExperiencesComponent implements OnInit {
         "Artificial intelligence and machine learning engineer"
     ]
     this.offers = ["Full Time","Contract","Intern","PPO"];
-    this.form = new FormGroup({
-      company: new FormControl("",[Validators.required]),
-      package: new FormControl("",[Validators.required]),
-      typeOffer: new FormControl("",[Validators.required]),
-      role: new FormControl("",[Validators.required]),
-      rounds: new FormControl("",[Validators.required]),
-      description: new FormControl("",[Validators.required])
+
+    this.route.params.subscribe(params => {
+      // console.log("params",params.id);
+      if(params.id){
+        this.updateValue(params.id);
+      }
+
     });
+
   }
 
   create(form){
@@ -80,6 +91,35 @@ export class AddExperiencesComponent implements OnInit {
       this.spinner.hide();
       this.toastr.error('Failed', err.error.message);
     });
+  }
+
+
+  updateValue(id){
+
+    this.spinner.show();
+    this.CommonService.fetchpostdetails(id)
+    .then((res)=>{
+      this.spinner.hide();
+      this.blog = res['blogs'];
+      if(this.blog === null || this.blog === undefined){
+        this.router.navigate(["my-experiences"]);
+      }
+      // console.log('res is',this.blog);
+
+
+      this.form = new FormGroup({
+        company: new FormControl(this.blog.company,[Validators.required]),
+        package: new FormControl(this.blog.package,[Validators.required]),
+        typeOffer: new FormControl(this.blog.typeOffer,[Validators.required]),
+        role: new FormControl(this.blog.role,[Validators.required]),
+        rounds: new FormControl(this.blog.rounds,[Validators.required]),
+        description: new FormControl(this.blog.description,[Validators.required])
+      });
+    })
+    .catch((err)=>{
+      this.spinner.hide();
+      this.toastr.error('Failed', err.error.message);
+    })
   }
 
 }

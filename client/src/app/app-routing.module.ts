@@ -14,8 +14,10 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'placements',canActivate: [AuthGaurdService], component: PlacementsComponent },
   { path: 'my-experiences',canActivate: [AuthGaurdService], component: MyExperiencesComponent },
-  { path: 'view-placement/:id',canActivate: [AuthGaurdService], component: ViewPlacementComponent },
-  { path: 'add-experiences',canActivate: [AuthGaurdService], component: AddExperiencesComponent }
+  { path: 'view/:id',canActivate: [AuthGaurdService], component: ViewPlacementComponent },
+  { path: 'add-experiences',canActivate: [AuthGaurdService], component: AddExperiencesComponent },
+  { path: 'add-experiences/:id',canActivate: [AuthGaurdService], component: AddExperiencesComponent },
+
 ];
 
 @NgModule({

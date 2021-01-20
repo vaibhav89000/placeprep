@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CommonServiceService } from '../services/common-service.service';
@@ -15,7 +16,8 @@ export class MyExperiencesComponent implements OnInit {
 
   constructor(private CommonService: CommonServiceService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private route:Router) { }
 
   ngOnInit(): void {
     this.fetchAll();
@@ -64,6 +66,14 @@ export class MyExperiencesComponent implements OnInit {
       }, 2000);
       this.toastr.error('Failed');
     })
+  }
+
+  view(id){
+    this.route.navigate(["view",id]);
+  }
+
+  edit(id){
+    this.route.navigate(["add-experiences",id]);
   }
 
 

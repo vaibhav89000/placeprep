@@ -2,14 +2,16 @@
 
   <div class="row">
     <div class="col">
+
       <button type="button" class="btn btn-outline-primary mb-2" style="float: right;" [routerLink]="['../','add-experiences']">Add Experience</button>
     </div>
   </div>
 
   <div *ngFor="let row of showBlogs" class="row">
     <div *ngFor="let col of row" class="col-sm-4 col-12">
-      <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">{{col.company}}</div>
+      <div class="card text-white bg-primary mb-3" style="max-width: 20rem;" (click)="view(col._id)">
+        <div class="card-header">{{col.company}} <i class="fa fa-pencil" aria-hidden="true" style="color: white; float: right;"
+          (click)="edit(col._id)"></i></div>
         <div class="card-body">
           <p class="card-text"><span>Rounds</span> {{col.rounds}}</p>
           <p class="card-title"><span>Type Of Offer</span> {{col.typeOffer}}</p>
