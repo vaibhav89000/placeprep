@@ -63,6 +63,10 @@ export class AddExperiencesComponent implements OnInit {
 
   create(form){
     this.submitted = true;
+    if(!this.form.valid){
+      return;
+    }
+
     console.log(form);
     this.spinner.show();
     this.CommonService.addPost(form).then((res)=>{
