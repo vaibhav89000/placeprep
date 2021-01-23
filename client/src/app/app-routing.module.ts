@@ -10,6 +10,7 @@ import { AddExperiencesComponent } from './add-experiences/add-experiences.compo
 
 
 const routes: Routes = [
+
   { path: 'login',component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'placements',canActivate: [AuthGaurdService], component: PlacementsComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'view/:id',canActivate: [AuthGaurdService], component: ViewPlacementComponent },
   { path: 'add-experiences',canActivate: [AuthGaurdService], component: AddExperiencesComponent },
   { path: 'add-experiences/:id',canActivate: [AuthGaurdService], component: AddExperiencesComponent },
+  { path: '**',redirectTo: 'placements' },
 
 ];
 
