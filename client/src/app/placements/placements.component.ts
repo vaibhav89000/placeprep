@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormControlName, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +14,9 @@ export class PlacementsComponent implements OnInit {
 
   blogs: any;
   showBlogs: any = [];
+  filterblogs: any = [];
+  form: FormGroup;
+  options: any = [];
 
   constructor(private CommonService: CommonServiceService,
     private spinner: NgxSpinnerService,
@@ -21,13 +25,72 @@ export class PlacementsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAll();
+
+    this.options = [
+      "company",
+      "package",
+      "typeOffer",
+      "role",
+      "rounds",
+    ]
+
+    this.form = new FormGroup({
+      filter: new FormControl("company"),
+      search: new FormControl("")
+    })
+
+    this.form.get('search')
+      .valueChanges
+      .subscribe((res) => {
+
+        if (res) {
+
+          this.showBlogs = [];
+
+          if (this.form.get('filter').value) {
+            if (this.form.get('filter').value === 'rounds') {
+              console.log(typeof res);
+              this.filterblogs = this.blogs.filter((result) => (result['rounds']).toString() === res);
+            }
+            else {
+              this.filterblogs = this.blogs.filter((result) => ((result[this.form.get('filter').value]).toLowerCase()).includes(res.toLowerCase()));
+            }
+
+            // console.log('this.filterblogs',this.filterblogs);
+            this.showBlogs = [];
+
+            let i = 0;
+            let arr = [];
+            this.filterblogs.forEach(element => {
+              i = i + 1;
+              arr.push(element);
+              if (i === 3) {
+                i = 0;
+                this.showBlogs.push(arr);
+                arr = [];
+              }
+            });
+            if (i > 0) {
+              this.showBlogs.push(arr);
+              // console.log('is i',i);
+            }
+          }
+
+
+        }
+        else {
+          this.fetchAll();
+        }
+      })
+
+
   }
 
-  fetchAll(){
+  fetchAll() {
 
     this.spinner.show();
 
-    this.CommonService.fetchall().subscribe((res)=>{
+    this.CommonService.fetchall().subscribe((res) => {
       // console.log('res',res);
 
       this.blogs = res['blogs'];
@@ -35,18 +98,18 @@ export class PlacementsComponent implements OnInit {
 
       this.showBlogs = [];
 
-      let i=0;
-      let arr=[];
+      let i = 0;
+      let arr = [];
       this.blogs.forEach(element => {
-        i = i+1;
+        i = i + 1;
         arr.push(element);
-        if(i===3){
-          i=0;
+        if (i === 3) {
+          i = 0;
           this.showBlogs.push(arr);
-          arr=[];
+          arr = [];
         }
       });
-      if(i>0){
+      if (i > 0) {
         this.showBlogs.push(arr);
         // console.log('is i',i);
       }
@@ -58,7 +121,7 @@ export class PlacementsComponent implements OnInit {
         this.spinner.hide();
       }, 1000);
 
-    },err => {
+    }, err => {
       // console.log('err',err);
 
       setTimeout(() => {
@@ -69,8 +132,8 @@ export class PlacementsComponent implements OnInit {
     })
   }
 
-  view(id){
-    this.router.navigate(["view",id]);
+  view(id) {
+    this.router.navigate(["view", id]);
   }
 
 
