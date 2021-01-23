@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocalStorageService } from './local-storage.service';
-
+import {environment} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +9,9 @@ export class CommonServiceService {
 
   constructor(private http:HttpClient,
     private LocalStorage:LocalStorageService) { }
+
+    url = environment.produrl;
+
 
   fetchall(){
     let auth_token = this.LocalStorage.get("token");
@@ -23,7 +26,7 @@ export class CommonServiceService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.get("http://localhost:8080/blogs/get", requestOptions);
+    return this.http.get(`${this.url}blogs/get`, requestOptions);
   }
 
   fetchUserPost(){
@@ -39,7 +42,7 @@ export class CommonServiceService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.get("http://localhost:8080/blogs/getsingle", requestOptions);
+    return this.http.get(`${this.url}blogs/getsingle`, requestOptions);
   }
 
   fetchpostdetails(id){
@@ -55,7 +58,7 @@ export class CommonServiceService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.get(`http://localhost:8080/blogs/getblogdetail/${id}`, requestOptions).toPromise();
+    return this.http.get(`${this.url}blogs/getblogdetail/${id}`, requestOptions).toPromise();
   }
 
   addPost(body){
@@ -72,7 +75,7 @@ export class CommonServiceService {
     };
     console.log("requestOptions",requestOptions);
 
-    return this.http.post(`http://localhost:8080/blogs/post`,body, requestOptions).toPromise();
+    return this.http.post(`${this.url}blogs/post`,body, requestOptions).toPromise();
   }
 
   editPost(body){
@@ -89,7 +92,7 @@ export class CommonServiceService {
     };
     console.log("requestOptions",requestOptions);
 
-    return this.http.post(`http://localhost:8080/blogs/updateblog`,body, requestOptions).toPromise();
+    return this.http.post(`${this.url}blogs/updateblog`,body, requestOptions).toPromise();
   }
 
 }

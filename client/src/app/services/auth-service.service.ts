@@ -5,6 +5,7 @@ import { User } from './user.model';
 import { rejects } from 'assert';
 import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
+import {environment} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +20,8 @@ export class AuthServiceService {
 
   }
 
+  url = environment.produrl;
+
   public userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
@@ -29,14 +32,14 @@ export class AuthServiceService {
 
 
   signup(body) {
-    return this.http.put("http://localhost:8080/auth/signup", body).toPromise();
+    return this.http.put(`${this.url}auth/signup`, body).toPromise();
   }
 
   login(body) {
 
     let loginPromise = new Promise((resolve, reject) => {
 
-      this.http.post("http://localhost:8080/auth/login", body)
+      this.http.post(`${this.url}auth/login`, body)
         .toPromise()
         .then((res: any) => {
 
