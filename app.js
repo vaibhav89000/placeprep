@@ -42,7 +42,7 @@ mongoose
     environment.MongoUrl
   )
   .then(result => {
-    app.listen(8080);
+    app.listen(port);
     console.log('server started');
   })
   .catch(err => console.log(err));
