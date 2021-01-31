@@ -250,3 +250,32 @@ exports.postStarredblog = (req,res,next) => {
   })
     
 };
+
+exports.starredblogs = (req,res,next) => {
+  
+  
+  const userid = req.userId;
+
+  User.findById(userid)
+  .then((result)=>{
+    const final = [];
+    result.starred.forEach(element =>{
+      final.push(mongoose.Types.ObjectId(element));
+    });
+    return Blog.find({
+      '_id': {$in: final}
+    })
+  })
+  .then((blog)=>{
+    res.status(200).json({
+      message: "Starred posts",
+      blogs: blog
+    })
+  })
+  .catch(err=>{
+    res.status(500).json({
+      message: 'Something went wrong!' + err
+    });
+  })
+    
+};
