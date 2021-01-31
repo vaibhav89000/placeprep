@@ -207,10 +207,10 @@ exports.postStarredblog = (req,res,next) => {
   const blogid = req.params.id;
   const userid = req.userId;
 
-
+  let already = false;
   User.findById(userid)
   .then((user)=>{
-    console.log('res',user);
+    // console.log('res',user);
     const starredArray = user.starred;
     // let flag=0;
     // starredArray.forEach((res)=>{
@@ -219,24 +219,28 @@ exports.postStarredblog = (req,res,next) => {
     //   }
     // })
     // console.log("flag",flag);
-    if(starredArray.includes(mongoose.Types.ObjectId(blogid))){
-      res.status(200).json({
-        user: user,
-        message: "Already in starred"
-      });
-    }
-    else{
-      user.starred.push(mongoose.Types.ObjectId(blogid));
-      return user.save();
+    if(user){
+      if(starredArray.includes(mongoose.Types.ObjectId(blogid))){
+        already = true;
+        return user.save();
+      }
+      else{
+        user.starred.push(mongoose.Types.ObjectId(blogid));   
+        return user.save();   
+      }
     }
     res.status(500).json({
       message: 'Something went wrong!' + err
     });
   })
   .then((user)=>{
+    let message = "Add to starred";
+    if(already){
+      message = "Already in starred"
+    }
     res.status(200).json({
       user: user,
-      message: "Add to starred"
+      message: message
     });
   })
   .catch(err=>{
