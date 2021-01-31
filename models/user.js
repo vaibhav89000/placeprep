@@ -19,6 +19,12 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Blog'
     }
+  ],
+  starred: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Blog'
+    }
   ]
 });
 

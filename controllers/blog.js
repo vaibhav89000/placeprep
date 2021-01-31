@@ -2,6 +2,8 @@ const Blog = require('../models/blog');
 const User = require('../models/user');
 const mongoose = require('mongoose');
 const { json } = require('body-parser');
+const user = require('../models/user');
+const { use } = require('../routes/blogs');
 
 exports.getblogs = (req,res,next) => {
     Blog.find()
@@ -198,4 +200,49 @@ exports.updateblog = (req,res,next) => {
         message: 'Something went wrong!' + err
       });
     })
+};
+
+exports.postStarredblog = (req,res,next) => {
+  
+  const blogid = req.params.id;
+  const userid = req.userId;
+
+
+  User.findById(userid)
+  .then((user)=>{
+    console.log('res',user);
+    const starredArray = user.starred;
+    // let flag=0;
+    // starredArray.forEach((res)=>{
+    //   if(mongoose.Types.ObjectId(res) === mongoose.Types.ObjectId(blogid)){
+    //     flag = 1;
+    //   }
+    // })
+    // console.log("flag",flag);
+    if(starredArray.includes(mongoose.Types.ObjectId(blogid))){
+      res.status(200).json({
+        user: user,
+        message: "Already in starred"
+      });
+    }
+    else{
+      user.starred.push(mongoose.Types.ObjectId(blogid));
+      return user.save();
+    }
+    res.status(500).json({
+      message: 'Something went wrong!' + err
+    });
+  })
+  .then((user)=>{
+    res.status(200).json({
+      user: user,
+      message: "Add to starred"
+    });
+  })
+  .catch(err=>{
+    res.status(500).json({
+      message: 'Something went wrong!' + err
+    });
+  })
+    
 };

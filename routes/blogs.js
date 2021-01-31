@@ -16,5 +16,6 @@ router.get('/getblogdetail/:id', isAuth, blogController.getsingleblog);
 
 
 router.post('/updateblog', isAuth, blogController.updateblog);
+router.post('/starredblog/:id', isAuth, blogController.postStarredblog);
 
 module.exports = router;    
