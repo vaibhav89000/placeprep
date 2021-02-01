@@ -279,3 +279,25 @@ exports.starredblogs = (req,res,next) => {
   })
     
 };
+
+exports.removeStarredblog = (req,res,next) => {
+  
+    const blogId = req.params.id;
+    const userId = req.userId;
+    // User.findById(userId)
+    // .then((user)=>{
+
+      User.findByIdAndUpdate(
+        userId, { $pull: { starred: { $in: blogId } } })
+    .then((result)=>{
+      res.status(200).json({
+        message: 'Deleted'   
+      });
+    })
+    .catch((err)=>{
+      console.log('i am here');
+      res.status(500).json({
+        message: 'Something went wrong ' + err    
+      });
+    })
+};
