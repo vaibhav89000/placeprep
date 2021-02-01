@@ -95,4 +95,21 @@ export class CommonServiceService {
     return this.http.post(`${this.url}blogs/updateblog`,body, requestOptions).toPromise();
   }
 
+  starredPost(id){
+    let auth_token = this.LocalStorage.get("token");
+    console.log(auth_token);
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict)
+    };
+    console.log("requestOptions",requestOptions);
+
+    return this.http.get(`${this.url}blogs/starredblog/${id}`, requestOptions).toPromise();
+  }
+
 }

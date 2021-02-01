@@ -136,6 +136,18 @@ export class PlacementsComponent implements OnInit {
     this.router.navigate(["view", id]);
   }
 
+  starred(id){
+    this.spinner.show();
+    this.CommonService.starredPost(id).then(res => {
+      this.spinner.hide();
+      this.toastr.success('Starred');
+    })
+    .catch((err)=>{
+      this.spinner.hide();
+      this.toastr.error('Failed');
+    })
+  }
+
 
 
 }
