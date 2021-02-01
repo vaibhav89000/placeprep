@@ -119,7 +119,7 @@ export class PlacementsComponent implements OnInit {
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 1000);
+      }, 200);
 
     }, err => {
       // console.log('err',err);
@@ -127,7 +127,7 @@ export class PlacementsComponent implements OnInit {
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 2000);
+      }, 200);
       this.toastr.error('Failed');
     })
   }

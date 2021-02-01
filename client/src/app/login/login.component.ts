@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         setTimeout(() => {
           this.spinner.hide();
-        }, 2000);
+        }, 200);
         this.form.reset();
         this.toastr.success('Success', 'Login Successful');
         this.router.navigate(['placements']);
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         console.log(err);
         setTimeout(() => {
           this.spinner.hide();
-        }, 2000);
+        }, 200);
         this.toastr.error('Failed', err.error.message);
       })
     this.submitted = false;

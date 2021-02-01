@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
 
         setTimeout(() => {
           this.spinner.hide();
-        }, 2000);
+        }, 200);
 
         this.form.reset();
         this.toastr.success('Success', 'User Created');
@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
 
         setTimeout(() => {
           this.spinner.hide();
-        }, 2000);
+        }, 200);
 
         if ((err.error.data).length > 0) {
           console.log('Error', err.error.data);
