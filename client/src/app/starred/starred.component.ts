@@ -77,16 +77,23 @@ export class StarredComponent implements OnInit {
   removeStarred(id){
     this.spinner.show();
 
+
     this.CommonService.removeStarred(id)
     .then((res)=>{
       this.spinner.hide();
       this.toastr.success(res['message']);
+      setTimeout(() => {
+        this.ngOnInit();
+      }, 500);
     })
     .catch((err)=>{
       this.spinner.hide();
       this.toastr.error('Failed');
+      setTimeout(() => {
+        this.ngOnInit();
+      }, 500);
     })
-    this.ngOnInit();
+
   }
 
 

@@ -132,7 +132,6 @@ export class CommonServiceService {
 
     const headerDict = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
       'Authorization': `Bearer ${auth_token}`
     }
 
@@ -140,7 +139,7 @@ export class CommonServiceService {
       headers: new HttpHeaders(headerDict)
     };
 
-    return this.http.get(`${this.url}blogs/removedstarredblog/${id}`, requestOptions).toPromise();
+    return this.http.post(`${this.url}blogs/removedstarredblog/${id}`,{}, requestOptions).toPromise();
   }
 
 }

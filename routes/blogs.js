@@ -18,6 +18,6 @@ router.get('/getblogdetail/:id', isAuth, blogController.getsingleblog);
 router.post('/updateblog', isAuth, blogController.updateblog);
 router.get('/starredblog/:id', isAuth, blogController.postStarredblog);
 router.get('/starredblogs', isAuth, blogController.starredblogs);
-router.get('/removedstarredblog/:id', isAuth, blogController.removeStarredblog);
+router.post('/removedstarredblog/:id', isAuth, blogController.removeStarredblog);
 
 module.exports = router;    
