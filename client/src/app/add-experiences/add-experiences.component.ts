@@ -93,6 +93,7 @@ export class AddExperiencesComponent implements OnInit {
         this.submitted = false;
         this.spinner.hide();
         this.toastr.success('Success', 'Blog is updated Successful');
+        this.router.navigate(['my-experiences']);
         this.form.reset();
       })
         .catch((err) => {

@@ -97,7 +97,7 @@ export class CommonServiceService {
 
   starredPost(id){
     let auth_token = this.LocalStorage.get("token");
-    console.log(auth_token);
+
     const headerDict = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -107,7 +107,6 @@ export class CommonServiceService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict)
     };
-    console.log("requestOptions",requestOptions);
 
     return this.http.get(`${this.url}blogs/starredblog/${id}`, requestOptions).toPromise();
   }

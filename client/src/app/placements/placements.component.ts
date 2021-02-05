@@ -140,7 +140,13 @@ export class PlacementsComponent implements OnInit {
     this.spinner.show();
     this.CommonService.starredPost(id).then(res => {
       this.spinner.hide();
-      this.toastr.success('Starred');
+      console.log('res',res);
+      if(res['message']){
+        this.toastr.success(res['message']);
+      }
+      else{
+        this.toastr.success('Starred');
+      }
     })
     .catch((err)=>{
       this.spinner.hide();
