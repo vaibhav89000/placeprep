@@ -50,4 +50,9 @@ export class AppComponent {
     this.router.navigate(['/my-experiences']);
   }
 
+  starred(){
+    this.shownav = !this.shownav;
+    this.router.navigate(['/starred']);
+  }
+
   }

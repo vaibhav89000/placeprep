@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyExperiencesComponent } from './my-experiences/my-experiences.component';
 import { ViewPlacementComponent } from './view-placement/view-placement.component';
 import { AddExperiencesComponent } from './add-experiences/add-experiences.component';
+import { StarredComponent } from './starred/starred.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AddExperiencesComponent } from './add-experiences/add-experiences.compo
     PlacementsComponent,
     MyExperiencesComponent,
     ViewPlacementComponent,
-    AddExperiencesComponent
+    AddExperiencesComponent,
+    StarredComponent
   ],
   imports: [
     BrowserModule,

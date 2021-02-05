@@ -7,6 +7,7 @@ import {AuthGaurdService} from './services/auth-gaurd.service';
 import { MyExperiencesComponent } from './my-experiences/my-experiences.component';
 import { ViewPlacementComponent } from './view-placement/view-placement.component';
 import { AddExperiencesComponent } from './add-experiences/add-experiences.component';
+import { StarredComponent } from './starred/starred.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'login',component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'placements',canActivate: [AuthGaurdService], component: PlacementsComponent },
+  { path: 'starred',canActivate: [AuthGaurdService], component: StarredComponent },
   { path: 'my-experiences',canActivate: [AuthGaurdService], component: MyExperiencesComponent },
   { path: 'view/:id',canActivate: [AuthGaurdService], component: ViewPlacementComponent },
   { path: 'add-experiences',canActivate: [AuthGaurdService], component: AddExperiencesComponent },
