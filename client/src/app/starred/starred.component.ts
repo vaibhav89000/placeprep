@@ -28,8 +28,9 @@ export class StarredComponent implements OnInit {
 
     this.spinner.show();
 
-    this.CommonService.fetchUserPost().subscribe((res)=>{
+    this.CommonService.fetchStarred().subscribe((res)=>{
 
+      console.log('res',res);
       this.blogs = res['blogs'];
       // console.log('blogs',this.blogs);
 
@@ -74,8 +75,18 @@ export class StarredComponent implements OnInit {
   }
 
   removeStarred(id){
-    // this.route.navigate(["add-experiences",id]);
-    console.log('remove');
+    this.spinner.show();
+
+    this.CommonService.removeStarred(id)
+    .then((res)=>{
+      this.spinner.hide();
+      this.toastr.success(res['message']);
+    })
+    .catch((err)=>{
+      this.spinner.hide();
+      this.toastr.error('Failed');
+    })
+    this.ngOnInit();
   }
 
 

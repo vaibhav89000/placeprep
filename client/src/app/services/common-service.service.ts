@@ -111,4 +111,36 @@ export class CommonServiceService {
     return this.http.get(`${this.url}blogs/starredblog/${id}`, requestOptions).toPromise();
   }
 
+  fetchStarred(){
+    let auth_token = this.LocalStorage.get("token");
+
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict)
+    };
+
+    return this.http.get(`${this.url}blogs/starredblogs`, requestOptions);
+  }
+
+  removeStarred(id){
+    let auth_token = this.LocalStorage.get("token");
+
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict)
+    };
+
+    return this.http.get(`${this.url}blogs/removedstarredblog/${id}`, requestOptions).toPromise();
+  }
+
 }
