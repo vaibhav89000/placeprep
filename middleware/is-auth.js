@@ -14,8 +14,9 @@ module.exports = (req,res,next) => {
     try{
         decodedToken = jwt.verify(token, 'somesupersecretsecret');
     } catch {
-        err.statusCode = 500;
-        throw err;
+        const error = new Error('Not authenticated.');
+        error.statusCode = 500;
+        throw error;
     }
     
     if(!decodedToken){
