@@ -14,6 +14,7 @@ let transporter = nodemailer.createTransport(sendgridTransport({
 
 const User = require('../models/user');
 
+// controller for signup
 exports.signup = (req, res, next) => {
 
   const errors = validationResult(req);
@@ -66,6 +67,7 @@ exports.signup = (req, res, next) => {
     });
 }
 
+// controller for login
 exports.login = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;

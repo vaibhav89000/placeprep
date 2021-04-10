@@ -6,7 +6,7 @@ const authController = require('../controllers/auth');
 
 const router = express.Router();
 
-
+// this is for signup
 router.put('/signup',
 [
     body('email')
@@ -31,6 +31,7 @@ router.put('/signup',
   authController.signup
   );
 
+  // this is for login
 router.post('/login', authController.login);
 
 

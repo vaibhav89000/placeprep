@@ -5,6 +5,7 @@ const { json } = require('body-parser');
 const user = require('../models/user');
 const { use } = require('../routes/blogs');
 
+// fetch all blogs
 exports.getblogs = (req,res,next) => {
     Blog.find()
     .then(result => {
@@ -22,6 +23,7 @@ exports.getblogs = (req,res,next) => {
     })
 };
 
+// post new blog
 exports.postblog = (req,res,next) => {
         // const errors = validationResult(req);
         // if (!errors.isEmpty()) {
@@ -75,6 +77,7 @@ exports.postblog = (req,res,next) => {
           })
 };
 
+// fetch all blogs of the particular user
 exports.getsingleblogs = (req,res,next) => {
   const userId = req.userId;
 
@@ -101,6 +104,7 @@ exports.getsingleblogs = (req,res,next) => {
   })
 };
 
+// fetch single blog using id
 exports.getsingleblog = (req,res,next) => {
   // const userId = req.userId;
   const blogId = req.params.id;
@@ -140,6 +144,7 @@ exports.getsingleblog = (req,res,next) => {
   })
 };
 
+// update the blog using id
 exports.updateblog = (req,res,next) => {
   // const errors = validationResult(req);
   // if (!errors.isEmpty()) {
@@ -202,6 +207,7 @@ exports.updateblog = (req,res,next) => {
     })
 };
 
+// add starred blog
 exports.postStarredblog = (req,res,next) => {
   
   const blogid = req.params.id;
@@ -251,6 +257,7 @@ exports.postStarredblog = (req,res,next) => {
     
 };
 
+// fecth all starred blog of the user
 exports.starredblogs = (req,res,next) => {
   
   
@@ -280,6 +287,7 @@ exports.starredblogs = (req,res,next) => {
     
 };
 
+// remove the starred blog from the starred list of user blog
 exports.removeStarredblog = (req,res,next) => {
   
     const blogId = req.params.id;
